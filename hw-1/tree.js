@@ -1,3 +1,4 @@
+const { Console } = require('console')
 const fs = require('fs')
 
 const args = process.argv.slice(2)
@@ -87,7 +88,50 @@ if (args[0] === '--help') {
     unique_folders_path.forEach(path => {
       directory.push(collectObject(path))
     })
-    console.log(directory)
+
+    console.log('Выбран каталог: ' + path)
+    console.log('Выбрана глубина: ' + depth)
+    console.log(path)
+    drawRow = (object) => {
+      let i = -1
+      let pos = -1;
+      let last
+      let array_folders = []
+      while ((pos = object.path.indexOf('\\', pos + 1)) != -1) {
+        i = i + 1
+        last = pos
+        array_folders.push(object.path.slice(last, object.path.length))
+      }
+      let folder_name = object.path.slice(last + 1, object.path.length)
+      let row = '|'
+      if (i === 1) {
+        row += '- '
+      } else {
+        for (let j = 1; j <= i; j++) {
+          row = row + ' '
+        }
+        row +='*'
+      }
+      // отрисовка файлов в папке
+      let files = '\n'
+      if (object.files.length) {
+        let index = (row + folder_name).match(/\w/)?.index
+        let whitespace = '|'
+        for (let k = 1; k < index; k++) {
+          whitespace += ' '
+        }
+        object.files.forEach(file => {
+          files += whitespace + '`-- ' + file + '\n'
+        })
+      }
+      files = files.substring(0, files.length - 1)
+      // конец отрисовки файлов в папке
+      console.log(row + folder_name + files)
+    }
+
+    directory.forEach(folder => {
+      drawRow(folder)
+    })
   }
 } else {
   console.log("Необходимо указать три аргумента! \n Введите 'node tree.js --help' для справки")
