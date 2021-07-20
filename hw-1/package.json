@@ -1,0 +1,12 @@
+{
+  "name": "tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tree_view_structure.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "hello": "./index.js"
+  }
+}
