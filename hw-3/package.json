@@ -1,0 +1,14 @@
+{
+  "name": "test_jest",
+  "version": "1.0.0",
+  "description": "тестирование приложения tree",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
