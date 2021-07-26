@@ -7,14 +7,13 @@ const minNumber = 1000000
 const endFile = './end.txt'
 
 const sortChunk = (chunkToString) => {
-  let str = chunkToString
   if (chunkToString[0] === ',') {
-    str = chunkToString.substring(1)
+    chunkToString = chunkToString.substring(1)
   }
   if (chunkToString.slice(-1) === ',') {
-    str = chunkToString.substring(chunkToString.length)
+    chunkToString = chunkToString.substring(chunkToString[0], chunkToString.length - 1)
   }
-  let arr = str.split(',')
+  let arr = chunkToString.split(',')
   arr.sort((a, b) => a - b)
   return ({ sortedChunk: arr.join(','), minValue: arr[0] })
 }
@@ -33,25 +32,24 @@ while (fs.lstatSync(pathToFile).size / 1024 / 1024 < 100) {
 
 let i = 0
 
-const writeToEnd = fs.createWriteStream(endFile)
+let textForEndFile = ''
 
 readStream.on('data', (chunk) => {
   ++i
   const result = sortChunk(chunk.toString())
-
   const writeStreamToOne = fs.createWriteStream('./' + i + '.txt')
   writeStreamToOne.write(result.sortedChunk)
   writeStreamToOne.end(() => {
     const read = fs.createReadStream('./' + i + '.txt')
     read.on('data', (chunk) => {
       const result = sortChunk(chunk.toString())
-      writeToEnd.write(result.minValue + ', ')
+      textForEndFile += result.minValue + ', '
     })
   })
 })
 
-readStream.on('close', () => {
-  let endFileText = fs.readFileSync(endFile)
-  let result = sortChunk(endFileText.toString())
+readStream.resume()
+readStream.on('end', () => {
+  let result = sortChunk(textForEndFile)
   fs.writeFileSync(endFile, result.sortedChunk)
 })
