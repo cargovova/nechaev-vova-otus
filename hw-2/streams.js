@@ -1,36 +1,27 @@
 import * as fs from 'fs';
 
 const pathToFile = './numbers.txt'
-const markForTenFiles = 64 * 1024 * 100
+const mark = 64 * 1024 * 100
 const maxNumber = 1000000000
 const minNumber = 1000000
 const endFile = './end.txt'
 
-var sortChunk = (chunkToString) => {
+const sortChunk = (chunkToString) => {
   let str = chunkToString
   if (chunkToString[0] === ',') {
     str = chunkToString.substring(1)
   }
-  if (chunkToString[chunkToString.length] === ',') {
+  if (chunkToString.slice(-1) === ',') {
     str = chunkToString.substring(chunkToString.length)
   }
   let arr = str.split(',')
-  arr.sort((a, b) => {
-    return a - b
-  })
+  arr.sort((a, b) => a - b)
   return ({ sortedChunk: arr.join(','), minValue: arr[0] })
 }
 
-try {
-  fs.lstatSync(pathToFile) || null
-  fs.writeFileSync(pathToFile, '')
-  console.log("Файл numbers.txt уже существует в текущей директории.")
-} catch (error) {
-  fs.writeFileSync(pathToFile, '')
-  console.log("Создан файл numbers.txt в текущей директории.")
-}
+fs.writeFileSync(pathToFile, '')
 
-const readStream = fs.createReadStream(pathToFile, { highWaterMark: markForTenFiles })
+const readStream = fs.createReadStream(pathToFile, { highWaterMark: mark })
 
 let row = ''
 while (fs.lstatSync(pathToFile).size / 1024 / 1024 < 100) {
@@ -42,7 +33,6 @@ while (fs.lstatSync(pathToFile).size / 1024 / 1024 < 100) {
 
 let i = 0
 
-let readableStreams = []
 const writeToEnd = fs.createWriteStream(endFile)
 
 readStream.on('data', (chunk) => {
@@ -56,10 +46,12 @@ readStream.on('data', (chunk) => {
     read.on('data', (chunk) => {
       const result = sortChunk(chunk.toString())
       writeToEnd.write(result.minValue + ', ')
-      let i = 0
-      console.log(i + "| Запись min " + result.minValue)
     })
-    readableStreams.push(read)
   })
-  console.log("Запись в файл: " + './' + i + '.txt')
+})
+
+readStream.on('close', () => {
+  let endFileText = fs.readFileSync(endFile)
+  let result = sortChunk(endFileText.toString())
+  fs.writeFileSync(endFile, result.sortedChunk)
 })
