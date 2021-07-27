@@ -130,4 +130,4 @@ if (args[0] === '--help') {
   console.log("Необходимо указать три аргумента! \n Введите 'node tree.js --help' для справки")
 }
 
-module.exports = { depth, path, folders, cutForDepth, uniqueFoldersPath, collectObject }
+module.exports = { depth, path, folders, cutForDepth, uniqueFoldersPath, collectObject, scaner }

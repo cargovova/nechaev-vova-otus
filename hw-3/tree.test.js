@@ -1,16 +1,40 @@
-const tree = require('./tree')
+const { depth, path, folders, cutForDepth, uniqueFoldersPath, collectObject, scaner } = require('./tree')
+
+const elemIntoFolders = ['C:\\Users\\Public\\Documents']
 
 test('should be exist args', () => {
-  expect(tree.depth).toBe("2")
-  expect(tree.path).toBe("C:\\test")
+  expect(depth).toBeTruthy()
+  expect(path).toBeTruthy()
 })
 
-test('should array length more 0', () => {
-  expect(tree.folders.length).toBeTruthy()
+test('should folders is Array. scanner push to folders[]', () => {
+  scaner(path)
+  expect(Array.isArray(folders)).toBeTruthy()
+  expect(folders.length).toBeTruthy()
+  expect(folders).toEqual(expect.arrayContaining(elemIntoFolders))
 })
 
-test('should be setting depth', () => {
-  expect(tree.cutForDepth.length).toBeTruthy()
+test('should be cuted for depth', () => {
+  let isCutted = true
+  let i = 0
+  let pos = path.length
+  const checkDepth = (el) => {
+    const findedPos = el.indexOf('\\', pos)
+    if (findedPos !== -1) {
+      i = i + 1
+      pos = findedPos + 1
+      checkDepth(el)
+    }
+  }
+  let elems = []
+  cutForDepth(folders, path).forEach(element => {
+    elems.push(element)
+    i = 0
+    pos = path.length
+    checkDepth(element)
+    if (i > depth) { isCutted = false }
+  })
+  expect(isCutted).toBeTruthy()
 })
 
 test('should be unique elements', () => {
@@ -24,11 +48,11 @@ test('should be unique elements', () => {
     'C:\\test\\third'
   ]
   const isArrayUnique = arr => Array.isArray(arr) && new Set(arr).size === arr.length
-  expect(isArrayUnique(tree.uniqueFoldersPath(folders))).toBeTruthy()
+  expect(isArrayUnique(uniqueFoldersPath(folders))).toBeTruthy()
 })
 
 test('should be setting depth', () => {
-  expect(tree.collectObject('C:\\test\\first')).toMatchObject({
+  expect(collectObject(path)).toMatchObject({
     files: expect.any(Array),
     folders: expect.any(Array),
     path: expect.stringMatching(/\w:(..\w+)+/)
