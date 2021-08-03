@@ -1,0 +1,12 @@
+{
+  "name": "mergsort",
+  "version": "1.0.0",
+  "description": "second version for pass homework",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --max-old-space-size=50 mergeSort.js"
+  },
+  "author": "",
+  "type": "module",
+  "license": "ISC"
+}
