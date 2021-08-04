@@ -60,12 +60,9 @@ const readFromOne = (i) => {
   readEveryFile.resume()
   readEveryFile.on('end', () => {
     if (endArray.length === firstArray.length + secondArray.length) {
-      let buffer = new ArrayBuffer(102400000)
-      let view = new Uint8Array(buffer)
       for (let j = 0; j < endArray.length; j++) {
-        view[j] = endArray[j]
+        writeEnd.write(endArray[j].toString())
       }
-      writeEnd.write(view)
       console.log(endArray)
     }
   })
