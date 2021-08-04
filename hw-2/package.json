@@ -1,0 +1,13 @@
+{
+  "name": "streams",
+  "version": "1.0.0",
+  "description": "использование потоков для записи и чтения больших файлов с 50 Мб RAM",
+  "main": "streams.js",
+  "scripts": {
+    "start": "node --max-old-space-size=50 streams.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC"
+}
