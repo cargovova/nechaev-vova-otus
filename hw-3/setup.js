@@ -1,1 +1,0 @@
-process.argv = ['node', 'tree', '-D', '2', 'C:\\Users\\Public']

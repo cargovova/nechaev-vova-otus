@@ -4,11 +4,13 @@
   "description": "тестирование приложения tree",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "coverage": "npx jest --coverage"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "memfs": "^3.2.2",
   }
 }
