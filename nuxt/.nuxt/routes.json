@@ -1,0 +1,26 @@
+[
+  {
+    "name": "allCources",
+    "path": "/allCources",
+    "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\allCources.vue",
+    "chunkName": "pages/allCources"
+  },
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\login.vue",
+    "chunkName": "pages/login"
+  },
+  {
+    "name": "myCources",
+    "path": "/myCources",
+    "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\myCources.vue",
+    "chunkName": "pages/myCources"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]
