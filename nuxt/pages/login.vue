@@ -56,7 +56,7 @@ export default {
         username: this.username,
         password: this.password
       }
-      this.$axios.post('/auth/login', data)
+      this.$axios.post('/auth/login', data, { withCredentials: true })
       .then((result) => {
         this.$store.dispatch('login', result)
         this.$router.push('/myCources')

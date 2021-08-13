@@ -5,9 +5,10 @@ const jwt = require('jsonwebtoken')
 const { validationResult } = require('express-validator')
 const { secret } = require('./config')
 
-const generateAccessToken = (id, roles) => {
+const generateAccessToken = (id, username, roles) => {
   const payload = {
     id,
+    username,
     roles
   }
   return jwt.sign(payload, secret, { expiresIn: '24h' })
@@ -47,15 +48,17 @@ class authController {
       if (!validPassword) {
         return res.status(400).json({ message: 'Пароль не верный' })
       }
-      const token = generateAccessToken(user._id, user.roles)
-      return res.status(200).json({ token })
-    } catch {
-      console.log(e)
+      const token = generateAccessToken(user._id, user.username, user.roles)
+      res.cookie('token', token, { httpOnly: true })
+      return res.status(200).json({ message: 'Login success' })
+    } catch (error) {
+      console.log(error)
       res.status(400).json({ message: 'Login error' })
     }
   }
 
   async getUsers(req, res) {
+    // нужно сделать бэкап базы и избавиться от этого роута
     try {
       const userRole = new Role()
       const adminRole = new Role({ value: "ADMIN" })
@@ -65,6 +68,18 @@ class authController {
       res.json(users)
     } catch {
 
+    }
+  }
+
+  async validate(req, res) {
+    if (req.headers.cookie) {
+      const token = req.cookies.token
+      const isValid = jwt.verify(token, secret)
+      isValid
+        ? res.status(200).json({ isValid: true })
+        : res.status(200).json({ isValid: false })
+    } else {
+      res.status(200).json({ message: 'Cookie is not exist' })
     }
   }
 }

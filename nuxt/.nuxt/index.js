@@ -15,6 +15,7 @@ import { createStore } from './store.js'
 
 import nuxt_plugin_plugin_546262ec from 'nuxt_plugin_plugin_546262ec' // Source: .\\components\\plugin.js (mode: 'all')
 import nuxt_plugin_plugin_e7c3bef0 from 'nuxt_plugin_plugin_e7c3bef0' // Source: .\\vuetify\\plugin.js (mode: 'all')
+import nuxt_plugin_cookieuniversalnuxt_0f3d0a92 from 'nuxt_plugin_cookieuniversalnuxt_0f3d0a92' // Source: .\\cookie-universal-nuxt.js (mode: 'all')
 import nuxt_plugin_axios_13744de2 from 'nuxt_plugin_axios_13744de2' // Source: .\\axios.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -218,6 +219,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (typeof nuxt_plugin_plugin_e7c3bef0 === 'function') {
     await nuxt_plugin_plugin_e7c3bef0(app.context, inject)
+  }
+
+  if (typeof nuxt_plugin_cookieuniversalnuxt_0f3d0a92 === 'function') {
+    await nuxt_plugin_cookieuniversalnuxt_0f3d0a92(app.context, inject)
   }
 
   if (typeof nuxt_plugin_axios_13744de2 === 'function') {

@@ -13,5 +13,6 @@ router.post(
 )
 router.post('/login', authController.login)
 router.get('/users', authController.getUsers)
+router.post('/validate', authController.validate)
 
 module.exports = router

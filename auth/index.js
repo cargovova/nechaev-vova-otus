@@ -2,11 +2,13 @@ const express = require('express')
 const mongoose = require('mongoose')
 const authRouter = require('./authRouter')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 
 const PORT = 3001
 const app = express()
-app.use(cors())
+app.use(cookieParser())
 app.use(express.json())
+app.use(cors({ origin: true, credentials: true }))
 app.use('/auth', authRouter)
 
 const start = async () => {

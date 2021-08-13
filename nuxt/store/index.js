@@ -12,6 +12,17 @@ export const mutations = {
 }
 
 export const actions = {
+  async nuxtServerInit({ commit }, { redirect }) {
+    await this.$axios.post('/auth/validate', '', { withCredentials: true })
+      .then((result) => {
+        if (!result.data.isValid) {
+          redirect('/login')
+        }
+      })
+      .catch(() => {
+        redirect('/login')
+      })
+  },
   login({ commit }, payload) {
     commit('setToken', payload)
   },
