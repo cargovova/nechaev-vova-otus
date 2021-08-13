@@ -15,4 +15,81 @@ router.post('/login', authController.login)
 router.get('/users', authController.getUsers)
 router.post('/validate', authController.validate)
 
+/**
+ * @swagger
+ * /auth/register:
+ *    post:
+ *      summary: зарегистрироваться
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - in: body
+ *          description: учетные данные 
+ *          schema:
+ *            type: object
+ *            required:
+ *              - username
+ *              - password
+ *            properties:
+ *              username:
+ *                type: string
+ *              password:
+ *                type: string
+ *            example:
+ *              username: 'name_name'
+ *              password: '123456'
+ *      responses:
+ *        '200':
+ *          description: пользователь зарегистрирован
+ *        '400':
+ *          description: ошибка
+*/
+
+/**
+ * @swagger
+ * /auth/login:
+ *    post:
+ *      summary: логин
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - in: body
+ *          description: учетные данные 
+ *          schema:
+ *            type: object
+ *            required:
+ *              - username
+ *              - password
+ *            properties:
+ *              username:
+ *                type: string
+ *              password:
+ *                type: string
+ *            example:
+ *              username: 'name_name'
+ *              password: '123456'
+ *      responses:
+ *        '200':
+ *          description: кука
+ *        '400':
+ *          description: ошибка
+*/
+/**
+ * @swagger
+ * /auth/validate:
+ *    post:
+ *      summary: валидация куки
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - in: cookie
+ *          description: проверка куки
+ *          name: token
+ *      responses:
+ *        '200':
+ *          description: "{isValid: true}"
+ *        '400':
+ *          description: ошибка
+*/
+
 module.exports = router
