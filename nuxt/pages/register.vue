@@ -1,10 +1,10 @@
 <template>
   <v-card>
-    <v-card-title>Введите логин и пароль | ВХОД</v-card-title>
+    <v-card-title>Введите логин и пароль | РЕГИСТРАЦИЯ</v-card-title>
     <v-card-text>
       <v-form
         v-model="valid"
-        @submit.prevent="login"
+        @submit.prevent="register"
       >
         <v-text-field
           v-model="username"
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'Register',
   data () {
     return {
       error: '',
@@ -51,19 +51,27 @@ export default {
     }
   },
   methods: {
-    login(){
-      const data = {
-        username: this.username,
-        password: this.password
-      }
-      this.$axios.post('/auth/login', data, { withCredentials: true })
+    register(){
+      this.$axios.post('/auth/cookie', '', { withCredentials: true })
       .then((result) => {
-        this.$store.dispatch('login', result)
-        this.$router.push('/myCources')
+        this.$store.dispatch('logout')
       })
       .catch((error) => {
         this.error = error
       })
+      const data = {
+          username: this.username,
+          password: this.password
+        }
+      this.$axios.post('/auth/register', data, { withCredentials: true })
+        .then((result) => {
+          console.log(result.data.message)
+          this.$store.dispatch('login', result)
+          this.$router.push('/login')
+        })
+      .catch((error) => {
+          this.error = error.response.data.message
+        })
     }
   }
 }

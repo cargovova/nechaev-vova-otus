@@ -3,6 +3,10 @@ homeworks
 
 ## Инструкция для запуска проекта.
 
+### Через docker-compose
+1. в корневой директории выполнить `docker-compose up`
+
+### Через docker run
 1. docker:
 * `docker network create mongo`
 * `docker run -d --network mongo -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=example --name mongo -p 27017:27017 mongo`

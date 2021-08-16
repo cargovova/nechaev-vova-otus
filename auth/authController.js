@@ -19,14 +19,14 @@ class authController {
     try {
       const errors = validationResult(req)
       if (!errors.isEmpty()) {
-        return res.status(400).json({ message: 'Ошибка при регистрации', errors })
+        return res.status(400).json({ message: 'Ошибка при регистрации' })
       }
       const { username, password } = req.body
       const candidate = await User.findOne({ username })
       if (candidate) {
-        return res.status(400).json({ message: 'Пользователь с таким именем уже существует' })
+        return res.status(409).json({ message: 'Пользователь с таким именем уже существует' })
       }
-      const hashPassword = bcrypt.hashSync(password, 5);
+      const hashPassword = bcrypt.hashSync(password, 5)
       const userRole = await Role.findOne({ value: 'USER' })
       const user = new User({ username, password: hashPassword, roles: [userRole.value] })
       await user.save()
@@ -72,12 +72,22 @@ class authController {
   }
 
   async validate(req, res) {
-    if (req.headers.cookie) {
+    if (req.cookies.token) {
       const token = req.cookies.token
       const isValid = jwt.verify(token, secret)
       isValid
         ? res.status(200).json({ isValid: true })
         : res.status(200).json({ isValid: false })
+    } else {
+      res.status(200).json({ message: 'Cookie is not exist' })
+    }
+  }
+
+  async delete(req, res) {
+    if (req.headers.cookie) {
+      const token = req.cookies.token
+      res.cookie('token', token, { httpOnly: true, maxAge: 0 })
+      res.status(200).json({ message: 'cookie removed' })
     } else {
       res.status(200).json({ message: 'Cookie is not exist' })
     }

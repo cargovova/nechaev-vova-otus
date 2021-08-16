@@ -15,9 +15,9 @@ export const actions = {
   async nuxtServerInit({ commit }, { redirect }) {
     await this.$axios.post('/auth/validate', '', { withCredentials: true })
       .then((result) => {
-        if (!result.data.isValid) {
-          redirect('/login')
-        }
+        !result.data.isValid
+          ? redirect('/login')
+          : commit('setToken', true)
       })
       .catch(() => {
         redirect('/login')

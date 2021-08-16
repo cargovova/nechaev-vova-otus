@@ -18,6 +18,12 @@
     "chunkName": "pages/myCources"
   },
   {
+    "name": "register",
+    "path": "/register",
+    "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\register.vue",
+    "chunkName": "pages/register"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\index.vue",

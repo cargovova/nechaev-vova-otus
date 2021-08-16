@@ -14,6 +14,9 @@ router.post(
 router.post('/login', authController.login)
 router.get('/users', authController.getUsers)
 router.post('/validate', authController.validate)
+router.post('/cookie', authController.delete)
+router.post('/register', authController.registration)
+
 
 /**
  * @swagger
@@ -74,6 +77,7 @@ router.post('/validate', authController.validate)
  *        '400':
  *          description: ошибка
 */
+
 /**
  * @swagger
  * /auth/validate:
