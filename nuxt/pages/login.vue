@@ -58,7 +58,7 @@ export default {
       }
       this.$axios.post('/auth/login', data, { withCredentials: true })
       .then((result) => {
-        this.$store.dispatch('login', result)
+        this.$store.dispatch('login', result.data)
         this.$router.push('/myCources')
       })
       .catch((error) => {

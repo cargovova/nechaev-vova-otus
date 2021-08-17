@@ -50,7 +50,7 @@ class authController {
       }
       const token = generateAccessToken(user._id, user.username, user.roles)
       res.cookie('token', token, { httpOnly: true })
-      return res.status(200).json({ message: 'Login success' })
+      return res.status(200).json({ message: 'Login success', user: { id: user._id, name: user.username } })
     } catch (error) {
       console.log(error)
       res.status(400).json({ message: 'Login error' })
@@ -74,9 +74,10 @@ class authController {
   async validate(req, res) {
     if (req.cookies.token) {
       const token = req.cookies.token
+      const decodedToken = jwt.decode(token)
       const isValid = jwt.verify(token, secret)
       isValid
-        ? res.status(200).json({ isValid: true })
+        ? res.status(200).json({ isValid: true, user: { id: decodedToken.id, name: decodedToken.username } })
         : res.status(200).json({ isValid: false })
     } else {
       res.status(200).json({ message: 'Cookie is not exist' })

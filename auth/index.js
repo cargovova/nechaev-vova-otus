@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const authRouter = require('./authRouter')
+const coursesRouter = require('./coursesRouter')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const swaggerJsdoc = require('swagger-jsdoc')
@@ -12,23 +13,24 @@ const options = {
       title: 'api для Express',
       description: 'описание api',
       version: '1.0.0',
-      servers: ["http://127.0.0.1:3001"]
+      servers: ["http://127.0.0.1:4001"]
     },
     openapi: '3.0.0'
   },
   swaggerOptions: {
     supportedSubmitMethods: []
   },
-  apis: ['authRouter.js'],
+  apis: ['authRouter.js', 'coursesRouter.js'],
 }
 const swaggerDocs = swaggerJsdoc(options)
 
-const PORT = 3001
+const PORT = 4001
 const app = express()
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors({ origin: true, credentials: true }))
 app.use('/auth', authRouter)
+app.use('/courses', coursesRouter)
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 const start = async () => {

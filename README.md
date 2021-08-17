@@ -23,3 +23,12 @@ homeworks
   "username": "user",
   "password": "password"
 }`** - registration user
+
+## addresses
+| service          |address                |
+| ---------------- | --------------------- |
+| nuxt ssr         | http://localhost:4000 |
+| back-end         | http://localhost:4001 |
+| swagger          | http://localhost:4001/api-docs/ |
+| mongo-express    | http://localhost:8081/ |
+| mongodb          | http://localhost:27017/ |

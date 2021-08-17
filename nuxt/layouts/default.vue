@@ -48,10 +48,17 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title v-text="$store.getters.username" />
       <v-spacer />
       <v-btn
         icon
+        @click.prevent="register"
+      >
+        <v-icon>mdi-account-plus</v-icon>
+      </v-btn>
+      <v-btn
+        icon
+        :disabled="!$store.getters.hasToken"
         @click.prevent="logout"
       >
         <v-icon>mdi-logout</v-icon>
@@ -95,14 +102,22 @@ export default {
           to: '/myCources'
         }
       ],
-      miniVariant: false,
-      title: 'Vuetify.js'
+      miniVariant: false
     }
   },
   methods: {
     logout () {
-      this.$store.dispatch('logout')
-      this.$router.push('/')
+      this.$axios.post('/auth/cookie', '', { withCredentials: true })
+      .then((result) => {
+        this.$store.dispatch('logout')
+        this.$router.push('/')
+      })
+      .catch((error) => {
+        this.error = error
+      })
+    },
+    register () {
+      this.$router.push('/register')
     }
   }
 }
