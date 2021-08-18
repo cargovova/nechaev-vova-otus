@@ -1,25 +1,39 @@
 <template>
-  <v-row>
-    <v-col class="text-center">
-      <img
-        src="/v.png"
-        alt="Vuetify.js"
-        class="mb-5"
-      >
-      <blockquote class="blockquote">
-        &#8220;First, solve the problem. Then, write the code.&#8221;
-        <footer>
-          <small>
-            <em>&mdash;John Johnson</em>
-          </small>
-        </footer>
-      </blockquote>
-    </v-col>
-  </v-row>
+  <div>
+    <v-card v-for="course in courses" :key="course._id" class="mb-2">
+      <v-card-title>{{ course.name }}</v-card-title>
+      <v-card-text>{{ course.description }}</v-card-text>
+      <v-card-actions>{{ course.lessonsList }}</v-card-actions>
+    </v-card>
+    <v-alert v-if="error" type="error" outlined text>
+      {{ error }}
+    </v-alert>
+  </div>
 </template>
 
 <script>
 export default {
-  middleware: ['auth']
+  middleware: ['auth'],
+  data() {
+    return {
+      courses: [],
+      error: null,
+    }
+  },
+  created() {
+    this.getMyCourses()
+  },
+  methods: {
+    getMyCourses() {
+      this.$axios
+        .get('/courses/' + this.$store.getters.userId)
+        .then((result) => {
+          this.courses = result.data.courses
+        })
+        .catch((error) => {
+          this.error = error
+        })
+    },
+  },
 }
 </script>

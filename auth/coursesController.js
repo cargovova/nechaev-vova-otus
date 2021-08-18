@@ -18,14 +18,24 @@ class coursesController {
 
   async create(req, res) {
     try {
-      const { name, description, lessonsList } = req.body
+      const { name, description, owners, lessonsList } = req.body
       const candidate = await Course.findOne({ name })
       if (candidate) {
         return res.status(409).json({ message: 'Курс с таким именем уже существует' })
       }
-      const course = new Course({ name, description, lessonsList })
+      const course = new Course({ name, description, owners, lessonsList })
       await course.save()
       return res.status(201).json({ message: 'Курс создан' })
+    } catch (e) {
+      console.log(e)
+      res.status(400).json({ message: e })
+    }
+  }
+
+  async getMyCourses(req, res) {
+    try {
+      const courses = await Course.find({ owners: req.params.user_id })
+      res.status(200).json({ courses: courses })
     } catch (e) {
       console.log(e)
       res.status(400).json({ message: e })

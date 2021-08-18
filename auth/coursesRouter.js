@@ -3,6 +3,7 @@ const router = new Router()
 const coursesController = require('./coursesController')
 
 router.get('/', coursesController.getAll)
+router.get('/:user_id', coursesController.getMyCourses)
 router.post('/', coursesController.create)
 router.put('/', coursesController.update)
 router.delete('/', coursesController.delete)

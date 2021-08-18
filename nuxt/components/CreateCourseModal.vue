@@ -63,19 +63,19 @@ export default {
     }
   },
   computed: {
-    // eslint-disable-next-line object-shorthand
-    shown: function () {
+    shown() {
       return this.showModal
     },
   },
   methods: {
     createCourse() {
-      const str = this.lessons.replace(/\s/g, '');
+      const str = this.lessons.replace(/\s/g, '')
       const lessons = str.split(',')
       const data = {
         name: this.name,
         description: this.desc,
         lessonsList: lessons,
+        owners: [this.$store.getters.userId]
       }
       this.$axios
         .post('/courses', data)

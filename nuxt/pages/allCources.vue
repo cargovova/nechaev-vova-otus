@@ -3,11 +3,11 @@
     <CreateCourseModal
       v-if="showModal"
       :show-modal="showModal"
-      @modalClose="showModal = false, getCourses()"
+      @modalClose=";(showModal = false), getCourses()"
     />
     <v-btn
       style="position: absolute; z-index: 200; right: 5px; top: 5px"
-      @click="showModal = true"
+      @click="checkToken"
     >
       <v-icon color="green"> mdi-plus </v-icon></v-btn
     >
@@ -44,6 +44,11 @@ export default {
         .catch((error) => {
           this.error = error
         })
+    },
+    checkToken() {
+      this.$store.getters.hasToken
+        ? (this.showModal = true)
+        : this.$router.push('/login')
     },
   },
 }
