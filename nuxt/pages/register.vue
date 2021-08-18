@@ -65,7 +65,6 @@ export default {
         }
       this.$axios.post('/auth/register', data, { withCredentials: true })
         .then((result) => {
-          console.log(result.data.message)
           this.$store.dispatch('login', result)
           this.$router.push('/login')
         })

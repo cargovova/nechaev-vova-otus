@@ -1,4 +1,7 @@
 {
+  "CreateCourseModal": {
+    "description": "Auto imported from components/CreateCourseModal.vue"
+  },
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
   },
