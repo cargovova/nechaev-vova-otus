@@ -1,6 +1,7 @@
 const User = require('./models/User')
 const Role = require('./models/Role')
 const Course = require('./models/Course')
+const Lesson = require('./models/Lesson')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { validationResult } = require('express-validator')
@@ -10,6 +11,14 @@ class coursesController {
   async getAll(req, res) {
     try {
       const allCourses = await Course.find()
+      for await (const course of allCourses) {
+        const lessons = []
+        for await (const id of course.lessonsList) {
+          const lessonFromDb = await Lesson.findOne({ _id: id })
+          lessons.push({ name: lessonFromDb.name, description: lessonFromDb.description })
+        }
+        course.lessonsList = lessons
+      }
       return res.status(200).json(allCourses)
     } catch (e) {
       console.log(e)
@@ -23,7 +32,18 @@ class coursesController {
       if (candidate) {
         return res.status(409).json({ message: 'Курс с таким именем уже существует' })
       }
-      const course = new Course({ name, description, owners, lessonsList })
+
+      const lessonsId = []
+      const lessonsFromDB = []
+      for await (const lesson of lessonsList) {
+        const lessonScheme = new Lesson({ name: lesson.name, description: lesson.description })
+        await lessonScheme.save()
+          .then((lessonFromDb) => {
+            lessonsId.push(lessonFromDb._id)
+            lessonsFromDB.push(lessonFromDb)
+          })
+      }
+      const course = new Course({ name, description, owners, lessonsList: lessonsId })
       await course.save()
       return res.status(201).json({ message: 'Курс создан' })
     } catch (e) {

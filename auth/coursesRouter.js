@@ -43,47 +43,28 @@ router.delete('/', coursesController.delete)
 
 /**
  * @swagger
- * /auth/login:
- *    post:
- *      summary: логин
+ * /courses/{user_id}:
+ *    get:
+ *      summary: показать только мои курсы
  *      consumes:
  *        - application/json
- *      parameters:
- *        - in: body
- *          description: учетные данные 
- *          schema:
- *            type: object
- *            required:
- *              - username
- *              - password
- *            properties:
- *              username:
- *                type: string
- *              password:
- *                type: string
- *            example:
- *              username: 'name_name'
- *              password: '123456'
  *      responses:
  *        '200':
- *          description: кука
+ *          description: вернет массив курсов
  *        '400':
- *          description: ошибка
+ *          description: что-то пошло не так
 */
+
 /**
  * @swagger
- * /auth/validate:
- *    post:
- *      summary: валидация куки
+ * /courses:
+ *    get:
+ *      summary: показать все курсы
  *      consumes:
  *        - application/json
- *      parameters:
- *        - in: cookie
- *          description: проверка куки
- *          name: token
  *      responses:
  *        '200':
- *          description: "{isValid: true}"
+ *          description: массив курсов
  *        '400':
  *          description: ошибка
 */

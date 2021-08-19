@@ -22,7 +22,7 @@
           autofocus
         >
         </v-text-field>
-        <v-btn height="50" class="mb-2" block tile type="submit" :disabled="!valid">Войти</v-btn>
+        <v-btn height="50" class="mb-2" block tile type="submit" :disabled="!valid">Зарегистрироваться</v-btn>
         <v-alert v-if=error type="error" outlined text>
           {{error}}
         </v-alert>

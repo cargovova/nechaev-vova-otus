@@ -11,10 +11,17 @@
     >
       <v-icon color="green"> mdi-plus </v-icon></v-btn
     >
-    <v-card v-for="course in courses" :key="course._id" class="mb-2">
+    <v-card v-for="course in courses" :key="course._id" class="mb-5">
       <v-card-title>{{ course.name }}</v-card-title>
       <v-card-text>{{ course.description }}</v-card-text>
-      <v-card-actions>{{ course.lessonsList }}</v-card-actions>
+      <v-row v-for="(lesson, i) in course.lessonsList" :key="i">
+        <v-col>
+          {{ lesson.name }}
+        </v-col>
+        <v-col>
+          {{ lesson.description }}
+        </v-col>
+      </v-row>
     </v-card>
     <v-alert v-if="error" type="error" outlined text>
       {{ error }}

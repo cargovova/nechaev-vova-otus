@@ -18,22 +18,32 @@
             autofocus
           >
           </v-text-field>
-          <v-text-field
-            v-model="desc"
-            desc="desc"
-            label="Описание"
-            type="text"
-            autofocus
-          >
+          <v-text-field v-model="desc" desc="desc" label="Описание" type="text">
           </v-text-field>
-          <v-text-field
-            v-model="lessons"
-            name="lessons"
-            label="Список занятий (ввести названия через запятую)"
-            type="text"
-            autofocus
-          >
-          </v-text-field>
+          <v-row>
+            <v-col cols="3">
+              <v-textarea
+                v-model="lessonsNames"
+                name="lessons"
+                label="Названия через enter"
+                type="text"
+                outlined
+                auto-grow
+              >
+              </v-textarea>
+            </v-col>
+            <v-col cols="9">
+              <v-textarea
+                v-model="lessonsDescrs"
+                name="lessons"
+                label="Описания через enter"
+                type="text"
+                outlined
+                auto-grow
+              >
+              </v-textarea>
+            </v-col>
+          </v-row>
         </v-form>
       </v-card-text>
       <v-card-actions>
@@ -59,7 +69,8 @@ export default {
       error: false,
       name: '',
       desc: '',
-      lessons: '',
+      lessonsNames: '',
+      lessonsDescrs: '',
     }
   },
   computed: {
@@ -69,13 +80,21 @@ export default {
   },
   methods: {
     createCourse() {
-      const str = this.lessons.replace(/\s/g, '')
-      const lessons = str.split(',')
+      const lessons = []
+      const lessonsNames = this.lessonsNames.split(/\n/)
+      const lessonsDescrs = this.lessonsDescrs.split(/\n/)
+      for (let i = 0; i < lessonsNames.length; i++) {
+        lessons.push({
+          name: lessonsNames[i],
+          description: lessonsDescrs[i],
+        })
+      }
+      console.log(lessons)
       const data = {
         name: this.name,
         description: this.desc,
         lessonsList: lessons,
-        owners: [this.$store.getters.userId]
+        owners: [this.$store.getters.userId],
       }
       this.$axios
         .post('/courses', data)
