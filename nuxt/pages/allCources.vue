@@ -3,7 +3,7 @@
     <CreateCourseModal
       v-if="showModal"
       :show-modal="showModal"
-      @modalClose=";(showModal = false), getCourses()"
+      @modalClose="(showModal = false), getCourses()"
     />
     <v-btn
       style="position: absolute; z-index: 200; right: 5px; top: 5px"

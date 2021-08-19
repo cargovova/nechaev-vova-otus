@@ -1,6 +1,19 @@
 <template>
   <div>
-    <v-card v-for="course in courses" :key="course._id" class="mb-2">
+    <EditCourseModal
+      v-if="showModal"
+      :show-modal="showModal"
+      :course="curentCourse"
+      @modalClose="showModal = false, getMyCourses()"
+    />
+    <v-card v-for="course in courses" :key="course._id" class="mb-5">
+      <v-btn
+        icon
+        style="position: absolute; right: 10px; top: 10px; z-index: 200"
+        @click="(curentCourse = course), (showModal = true)"
+      >
+        <v-icon>mdi-file-document-edit</v-icon>
+      </v-btn>
       <v-card-title>{{ course.name }}</v-card-title>
       <v-divider />
       <v-card-text>{{ course.description }}</v-card-text>
@@ -26,6 +39,8 @@ export default {
     return {
       courses: [],
       error: null,
+      showModal: false,
+      curentCourse: {}
     }
   },
   created() {

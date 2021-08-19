@@ -50,6 +50,8 @@
       </v-btn>
       <v-toolbar-title v-text="$store.getters.username" />
       <v-spacer />
+      <v-toolbar-title v-text="$store.getters.userId" />
+      <v-spacer />
       <v-btn
         icon
         @click.prevent="register"

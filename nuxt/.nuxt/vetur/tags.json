@@ -1,5 +1,8 @@
 {
   "CreateCourseModal": {
     "description": "Auto imported from components/CreateCourseModal.vue"
+  },
+  "EditCourseModal": {
+    "description": "Auto imported from components/EditCourseModal.vue"
   }
 }

@@ -71,21 +71,13 @@ class coursesController {
 
   async update(req, res) {
     try {
-      const { username, password } = req.body
-      const user = await User.findOne({ username })
-      if (!user) {
-        return res.status(400).json({ message: `Пользователь ${username} не найден` })
-      }
-      const validPassword = bcrypt.compareSync(password, user.password)
-      if (!validPassword) {
-        return res.status(400).json({ message: 'Пароль не верный' })
-      }
-      const token = generateAccessToken(user._id, user.username, user.roles)
-      res.cookie('token', token, { httpOnly: true })
-      return res.status(200).json({ message: 'Login success' })
+      const { name, description, owners } = req.body
+      const ownersArray = owners.split(',')
+      await Course.updateOne({ _id: req.params.course_id }, { $set: { name, description, owners: ownersArray } })
+      return res.status(200).json({ message: 'Edit success' })
     } catch (error) {
       console.log(error)
-      res.status(400).json({ message: 'Login error' })
+      res.status(400).json({ message: 'Edit course error' })
     }
   }
 

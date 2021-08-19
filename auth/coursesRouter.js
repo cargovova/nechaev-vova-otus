@@ -5,7 +5,7 @@ const coursesController = require('./coursesController')
 router.get('/', coursesController.getAll)
 router.get('/:user_id', coursesController.getMyCourses)
 router.post('/', coursesController.create)
-router.put('/', coursesController.update)
+router.put('/:course_id', coursesController.update)
 router.delete('/', coursesController.delete)
 
 /**
@@ -57,14 +57,33 @@ router.delete('/', coursesController.delete)
 
 /**
  * @swagger
- * /courses:
- *    get:
- *      summary: показать все курсы
+ * /courses/{course_id}:
+ *    put:
+ *      summary: изменить курс
  *      consumes:
  *        - application/json
+ *      parameters:
+ *        - in: body
+ *          description: Данные о курсе
+ *          schema:
+ *            type: object
+ *            required:
+ *              - name
+ *              - description
+ *            properties:
+ *              name:
+ *                type: string
+ *              description:
+ *                type: string
+ *              lessonsList:
+ *                type: array
+ *            example:
+ *              name: 'course name'
+ *              description: 'course description'
+ *              lessonsList: []
  *      responses:
  *        '200':
- *          description: массив курсов
+ *          description: 'Edit success'
  *        '400':
  *          description: ошибка
 */
