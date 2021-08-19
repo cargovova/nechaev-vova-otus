@@ -13,6 +13,7 @@
     >
     <v-card v-for="course in courses" :key="course._id" class="mb-5">
       <v-card-title>{{ course.name }}</v-card-title>
+      <v-divider />
       <v-card-text>{{ course.description }}</v-card-text>
       <v-row v-for="(lesson, i) in course.lessonsList" :key="i">
         <v-col>

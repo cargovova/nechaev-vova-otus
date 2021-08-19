@@ -3,30 +3,35 @@
     "name": "allCources",
     "path": "/allCources",
     "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\allCources.vue",
-    "chunkName": "pages/allCources"
+    "chunkName": "pages/allCources",
+    "_name": "_5b1b85f8"
   },
   {
     "name": "login",
     "path": "/login",
     "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\login.vue",
-    "chunkName": "pages/login"
+    "chunkName": "pages/login",
+    "_name": "_6586e9c8"
   },
   {
     "name": "myCources",
     "path": "/myCources",
     "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\myCources.vue",
-    "chunkName": "pages/myCources"
+    "chunkName": "pages/myCources",
+    "_name": "_97d2748a"
   },
   {
     "name": "register",
     "path": "/register",
     "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\register.vue",
-    "chunkName": "pages/register"
+    "chunkName": "pages/register",
+    "_name": "_e55f0bd8"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\nechaev-vova-otus\\\\nuxt\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_c841729e"
   }
 ]

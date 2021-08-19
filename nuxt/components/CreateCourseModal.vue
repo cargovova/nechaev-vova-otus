@@ -89,7 +89,6 @@ export default {
           description: lessonsDescrs[i],
         })
       }
-      console.log(lessons)
       const data = {
         name: this.name,
         description: this.desc,

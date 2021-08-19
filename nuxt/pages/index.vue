@@ -1,76 +1,33 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
+    <v-col>
       <v-card>
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+          Создание REST API для управления сущностями приложения
         </v-card-title>
         <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
+          Цель: Проект "my-courses" Образовательная платформа с возможностью
+          смотреть и редактировать медиа контент. Пользователи могут
+          редактировать и смотреть созданные курсы. Пользователи могут создавать
+          собственные курсы. Курсы содержат описание и наборы занятий. Список и
+          описание всех курсов (а также описание занятий) доступно всем
+          пользователям. Также есть возможность добавлять комментарии к занятию
+          и видеть комментарии других пользователей. Каждое занятие является веб
+          страницей и содержит описание и видео, а также может хранить
+          дополнительные ссылки, файлы и другие типы ресурсов. Чтобы у
+          пользователя появился доступ к занятиям несобственного курса, автор
+          курса может добавить пользователя в список разрешеннных аккаунтов.
         </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
+        <v-card-text>
+          Конфигурация и создание HTTPS ExpressJS проекта "my-courses" Выбор
+          шаблона, шаблонизатора (pug, nunjucks, react, vuexpress...) и рендер
+          основных страниц приложения без функционала (авторизация, список
+          курсов, страница курса, страница занятия) Выбор шаблона, шаблонизатора
+          (например, https://templated.co/ ) Конфигурация проекта. Оживление
+          шаблонов сайта с данными из MongoDB. Авторизация пользователей
+          Добавление авторизации при доступе к API. Добавление методов защиты от
+          попыток авторизации.
+        </v-card-text>
       </v-card>
     </v-col>
   </v-row>

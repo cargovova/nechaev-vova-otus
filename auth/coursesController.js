@@ -32,7 +32,6 @@ class coursesController {
       if (candidate) {
         return res.status(409).json({ message: 'Курс с таким именем уже существует' })
       }
-
       const lessonsId = []
       const lessonsFromDB = []
       for await (const lesson of lessonsList) {
@@ -54,8 +53,16 @@ class coursesController {
 
   async getMyCourses(req, res) {
     try {
-      const courses = await Course.find({ owners: req.params.user_id })
-      res.status(200).json({ courses: courses })
+      const allCourses = await Course.find({ owners: req.params.user_id })
+      for await (const course of allCourses) {
+        const lessons = []
+        for await (const id of course.lessonsList) {
+          const lessonFromDb = await Lesson.findOne({ _id: id })
+          lessons.push({ name: lessonFromDb.name, description: lessonFromDb.description })
+        }
+        course.lessonsList = lessons
+      }
+      res.status(200).json({ courses: allCourses })
     } catch (e) {
       console.log(e)
       res.status(400).json({ message: e })
