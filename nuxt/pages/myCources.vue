@@ -4,13 +4,13 @@
       v-if="showModal"
       :show-modal="showModal"
       :course="curentCourse"
-      @modalClose="showModal = false, getMyCourses()"
+      @modalClose=";(showModal = false), getMyCourses()"
     />
     <v-card v-for="course in courses" :key="course._id" class="mb-5">
       <v-btn
         icon
         style="position: absolute; right: 10px; top: 10px; z-index: 200"
-        @click="(curentCourse = course), (showModal = true)"
+        @click=";(curentCourse = course), (showModal = true)"
       >
         <v-icon>mdi-file-document-edit</v-icon>
       </v-btn>
@@ -40,7 +40,7 @@ export default {
       courses: [],
       error: null,
       showModal: false,
-      curentCourse: {}
+      curentCourse: {},
     }
   },
   created() {
@@ -49,7 +49,9 @@ export default {
   methods: {
     getMyCourses() {
       this.$axios
-        .get('/courses/' + this.$store.getters.userId)
+        .get('/courses/' + this.$store.getters.userId, {
+          withCredentials: true,
+        })
         .then((result) => {
           this.courses = result.data.courses
         })

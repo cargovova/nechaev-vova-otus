@@ -96,7 +96,7 @@ export default {
         owners: [this.$store.getters.userId],
       }
       this.$axios
-        .post('/courses', data)
+        .post('/courses', data, { withCredentials: true })
         .then((result) => {
           this.closeModal()
           this.$router.push('/allCources')

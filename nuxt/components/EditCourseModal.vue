@@ -59,10 +59,10 @@ export default {
         name: this.course_name,
         description: this.course_descr,
         owners: this.course_owners,
-        lessonsList: this.course.lessonsList
+        lessonsList: this.course.lessonsList,
       }
       this.$axios
-        .put('/courses/' + this.course._id, data)
+        .put('/courses/' + this.course._id, data, { withCredentials: true })
         .then((result) => {
           this.closeModal()
         })

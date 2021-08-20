@@ -1,13 +1,26 @@
 const Router = require('express')
 const router = new Router()
 const coursesController = require('./coursesController')
+const jwt = require('jsonwebtoken')
+const { secret } = require('./config')
+
+const validateCookie = (req, res, next) => {
+  return (req, res, next) => {
+    const token = req?.cookies?.token
+    const isValid = token
+      ? jwt.verify(token, secret)
+      : false
+    isValid ? next() : res.status(401).json({ isValid: false })
+  }
+}
 
 router.get('/', coursesController.getAll)
-router.get('/:user_id', coursesController.getMyCourses)
-router.post('/', coursesController.create)
-router.put('/:course_id', coursesController.update)
-router.get('/lessons/:lesson_id', coursesController.getLesson)
-router.put('/lessons/:lesson_id', coursesController.newComment)
+router.get('/:user_id', validateCookie(), coursesController.getMyCourses)
+router.post('/', validateCookie(), coursesController.create)
+router.put('/:course_id', validateCookie(), coursesController.update)
+router.get('/lessons/:lesson_id', validateCookie(), coursesController.getLesson)
+router.put('/lessons/:lesson_id', validateCookie(), coursesController.newComment)
+
 
 /**
  * @swagger

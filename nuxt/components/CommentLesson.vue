@@ -71,9 +71,13 @@ export default {
     },
     addComment() {
       this.$axios
-        .put('/courses/lessons/' + this.lessonId, {
-          newComment: this.newComment,
-        })
+        .put(
+          '/courses/lessons/' + this.lessonId,
+          {
+            newComment: this.newComment,
+          },
+          { withCredentials: true }
+        )
         .then((result) => {
           this.getLesson()
         })
