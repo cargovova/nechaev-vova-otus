@@ -20,7 +20,7 @@ router.post('/', validateCookie(), coursesController.create)
 router.put('/:course_id', validateCookie(), coursesController.update)
 router.get('/lessons/:lesson_id', validateCookie(), coursesController.getLesson)
 router.put('/lessons/:lesson_id', validateCookie(), coursesController.newComment)
-
+router.put('/lessons/all_data/:lesson_id', validateCookie(), coursesController.updateLesson)
 
 /**
  * @swagger

@@ -9,3 +9,4 @@ You can directly use them in pages and other components without the need to impo
 - `<CommentLesson>` | `<comment-lesson>` (components/CommentLesson.vue)
 - `<CreateCourseModal>` | `<create-course-modal>` (components/CreateCourseModal.vue)
 - `<EditCourseModal>` | `<edit-course-modal>` (components/EditCourseModal.vue)
+- `<EditLessonModal>` | `<edit-lesson-modal>` (components/EditLessonModal.vue)

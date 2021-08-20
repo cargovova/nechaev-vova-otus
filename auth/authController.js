@@ -46,7 +46,7 @@ class authController {
       if (!validPassword) {
         return res.status(400).json({ message: 'Пароль не верный' })
       }
-      const token = generateAccessToken(user._id, user.username, user.roles)
+      const token = generateAccessToken(user._id, user.username)
       res.cookie('token', token, { httpOnly: true })
       return res.status(200).json({ message: 'Login success', user: { id: user._id, name: user.username } })
     } catch (error) {

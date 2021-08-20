@@ -57,7 +57,7 @@ class coursesController {
         const lessons = []
         for await (const id of course.lessonsList) {
           const lessonFromDb = await Lesson.findOne({ _id: id })
-          lessons.push({ name: lessonFromDb.name, description: lessonFromDb.description })
+          lessons.push({ name: lessonFromDb.name, description: lessonFromDb.description, id: id })
         }
         course.lessonsList = lessons
       }
@@ -93,22 +93,21 @@ class coursesController {
   async newComment(req, res) {
     try {
       await Lesson.updateOne({ _id: req.params.lesson_id }, { $push: { comments: req.body.newComment } })
-      return res.status(200).json({message: 'success add new comment'})
+      return res.status(200).json({ message: 'success add new comment' })
     } catch (e) {
       console.log(e)
       res.status(400).json({ message: 'comment not set' })
     }
   }
 
-  async delete(req, res) {
-    if (req.headers.cookie) {
-      const token = req.cookies.token
-      const isValid = jwt.verify(token, secret)
-      isValid
-        ? res.status(200).json({ isValid: true })
-        : res.status(200).json({ isValid: false })
-    } else {
-      res.status(200).json({ message: 'Cookie is not exist' })
+  async updateLesson(req, res) {
+    try {
+      const { name, description, data } = req.body
+      await Lesson.updateOne({ _id: req.params.lesson_id }, { $set: { name, description, data: [data] } })
+      return res.status(200).json({ message: 'update successfully' })
+    } catch (e) {
+      console.log(e)
+      res.status(400).json({ message: 'update lesson unsucsessfully' })
     }
   }
 }

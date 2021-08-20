@@ -16,14 +16,6 @@ homeworks
 3. in auth folder:
 * `npm run start`
 
-**before use app send two request!**
-* ** GET http://localhost:3001/auth/users ** - create Roles
-* ** POST http://localhost:3001/auth/registration with body 
-`{
-  "username": "user",
-  "password": "password"
-}`** - registration user
-
 ## addresses
 | service          |address                |
 | ---------------- | --------------------- |
