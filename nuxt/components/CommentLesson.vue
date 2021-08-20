@@ -65,7 +65,8 @@ export default {
       this.$emit('modalClose')
     },
     getLesson() {
-      this.$axios.get('/courses/lessons/' + this.lessonId).then((result) => {
+      this.$axios.get('/courses/lessons/' + this.lessonId,
+          { withCredentials: true }).then((result) => {
         this.lesson = result.data
       })
     },

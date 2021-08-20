@@ -1,5 +1,4 @@
 const User = require('./models/User')
-const Role = require('./models/Role')
 const Course = require('./models/Course')
 const Lesson = require('./models/Lesson')
 const bcrypt = require('bcryptjs')

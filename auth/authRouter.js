@@ -12,7 +12,6 @@ router.post(
   authController.registration
 )
 router.post('/login', authController.login)
-router.get('/users', authController.getUsers)
 router.post('/validate', authController.validate)
 router.post('/cookie', authController.delete)
 router.post('/register', authController.registration)

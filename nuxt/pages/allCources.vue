@@ -30,6 +30,7 @@
           <v-col>
             {{ lesson.name }}
           </v-col>
+          <v-divider vertical/>
           <v-col>
             {{ lesson.description }}
           </v-col>

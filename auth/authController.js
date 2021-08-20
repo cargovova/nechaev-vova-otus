@@ -1,5 +1,4 @@
 const User = require('./models/User')
-const Role = require('./models/Role')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { validationResult } = require('express-validator')
@@ -27,8 +26,7 @@ class authController {
         return res.status(409).json({ message: 'Пользователь с таким именем уже существует' })
       }
       const hashPassword = bcrypt.hashSync(password, 5)
-      const userRole = await Role.findOne({ value: 'USER' })
-      const user = new User({ username, password: hashPassword, roles: [userRole.value] })
+      const user = new User({ username, password: hashPassword })
       await user.save()
       return res.status(201).json({ message: 'Пользователь успешно зарегистрирован' })
     } catch (e) {
@@ -54,20 +52,6 @@ class authController {
     } catch (error) {
       console.log(error)
       res.status(400).json({ message: 'Login error' })
-    }
-  }
-
-  async getUsers(req, res) {
-    // нужно сделать бэкап базы и избавиться от этого роута
-    try {
-      const userRole = new Role()
-      const adminRole = new Role({ value: "ADMIN" })
-      await userRole.save()
-      await adminRole.save()
-      const users = await User.find()
-      res.json(users)
-    } catch {
-
     }
   }
 

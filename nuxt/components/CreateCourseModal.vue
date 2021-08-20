@@ -20,6 +20,7 @@
           </v-text-field>
           <v-text-field v-model="desc" desc="desc" label="Описание" type="text">
           </v-text-field>
+          Занятия:
           <v-row>
             <v-col cols="3">
               <v-textarea
