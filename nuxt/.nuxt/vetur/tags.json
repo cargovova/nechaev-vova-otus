@@ -1,4 +1,7 @@
 {
+  "CommentLesson": {
+    "description": "Auto imported from components/CommentLesson.vue"
+  },
   "CreateCourseModal": {
     "description": "Auto imported from components/CreateCourseModal.vue"
   },

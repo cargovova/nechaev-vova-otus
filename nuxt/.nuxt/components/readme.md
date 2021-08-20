@@ -6,5 +6,6 @@ You can directly use them in pages and other components without the need to impo
 
 **Tip:** If a component is conditionally rendered with `v-if` and is big, it is better to use `Lazy` or `lazy-` prefix to lazy load.
 
+- `<CommentLesson>` | `<comment-lesson>` (components/CommentLesson.vue)
 - `<CreateCourseModal>` | `<create-course-modal>` (components/CreateCourseModal.vue)
 - `<EditCourseModal>` | `<edit-course-modal>` (components/EditCourseModal.vue)
