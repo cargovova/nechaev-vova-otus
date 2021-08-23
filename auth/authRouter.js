@@ -95,4 +95,22 @@ router.post('/register', authController.registration)
  *          description: ошибка
 */
 
+/**
+ * @swagger
+ * /auth/cookie:
+ *    post:
+ *      summary: удаление куки
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - in: cookie
+ *          description: удаление куки
+ *          name: token
+ *      responses:
+ *        '200':
+ *          description: 'cookie removed'
+ *        '400':
+ *          description: ошибка
+*/
+
 module.exports = router

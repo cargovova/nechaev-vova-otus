@@ -29,6 +29,94 @@ router.put('/lessons/all_data/:lesson_id', validateCookie(), coursesController.u
 
 /**
  * @swagger
+ * /courses/lessons/all_data/{:lesson_id}:
+ *    put:
+ *      summary: обновить поля занятия
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - in: body
+ *          description: обновить поля занятия
+ *          schema:
+ *            type: object
+ *            required:
+ *              - name
+ *              - description
+ *              - data
+ *            properties:
+ *              name:
+ *                type: string
+ *              description:
+ *                type: string
+ *              data:
+ *                type: array
+ *            example:
+ *              name: 'name'
+ *              description: 'asasdaasd'
+ *              data: []
+ *      responses:
+ *        '200':
+ *          description: 'success add new comment'
+ *        '400':
+ *          description: ошибка
+*/
+
+/**
+ * @swagger
+ * /courses/lesson/{:lesson_id}:
+ *    put:
+ *      summary: добавить коммент
+ *      consumes:
+ *        - application/json
+ *      parameters:
+ *        - in: body
+ *          description: Добавить коммент
+ *          schema:
+ *            type: object
+ *            required:
+ *              - newComment
+ *            properties:
+ *              name:
+ *                type: string
+ *            example:
+ *              newComment: 'ccomment'
+ *      responses:
+ *        '200':
+ *          description: 'success add new comment'
+ *        '400':
+ *          description: ошибка
+*/
+
+/**
+ * @swagger
+ * /courses/:
+ *    get:
+ *      summary: показать все курсы
+ *      consumes:
+ *        - application/json
+ *      responses:
+ *        '200':
+ *          description: вернет массив курсов
+ *        '400':
+ *          description: что-то пошло не так
+*/
+
+/**
+ * @swagger
+ * /courses/lessons/{:lesson_id}:
+ *    get:
+ *      summary: вернет объект занятия
+ *      consumes:
+ *        - application/json
+ *      responses:
+ *        '200':
+ *          description: вернет объект занятия
+ *        '400':
+ *          description: что-то пошло не так
+*/
+
+/**
+ * @swagger
  * /courses:
  *    post:
  *      summary: создать курс
@@ -62,7 +150,7 @@ router.put('/lessons/all_data/:lesson_id', validateCookie(), coursesController.u
 
 /**
  * @swagger
- * /courses/{user_id}:
+ * /courses/{:user_id}:
  *    get:
  *      summary: показать только мои курсы
  *      consumes:
@@ -76,7 +164,7 @@ router.put('/lessons/all_data/:lesson_id', validateCookie(), coursesController.u
 
 /**
  * @swagger
- * /courses/{course_id}:
+ * /courses/{:course_id}:
  *    put:
  *      summary: изменить курс
  *      consumes:
