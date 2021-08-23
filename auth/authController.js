@@ -56,15 +56,18 @@ class authController {
   }
 
   async validate(req, res) {
-    if (req.cookies.token) {
+    try {
       const token = req.cookies.token
-      const decodedToken = jwt.decode(token)
       const isValid = jwt.verify(token, secret)
-      isValid
-        ? res.status(200).json({ isValid: true, user: { id: decodedToken.id, name: decodedToken.username } })
-        : res.status(200).json({ isValid: false })
-    } else {
-      res.status(200).json({ message: 'Cookie is not exist' })
+      if (isValid) {
+        const decodedToken = jwt.decode(token)
+        res.status(200).json({ isValid: true, user: { id: decodedToken.id, name: decodedToken.username } })
+      } else {
+        res.status(200).json({ isValid: false })
+      }
+    } catch (e) {
+      console.log(e)
+      res.status(401).json({ isValid: false })
     }
   }
 

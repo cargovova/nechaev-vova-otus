@@ -52,7 +52,10 @@ class coursesController {
 
   async getMyCourses(req, res) {
     try {
-      const allCourses = await Course.find({ owners: req.params.user_id })
+      if(!req?.params?.user_id){
+        res.status(401).json({ isValid: false })
+      }
+      const allCourses = await Course.find({ owners: req?.params?.user_id })
       for await (const course of allCourses) {
         const lessons = []
         for await (const id of course.lessonsList) {

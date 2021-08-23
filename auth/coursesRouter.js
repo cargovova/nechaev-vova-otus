@@ -6,11 +6,16 @@ const { secret } = require('./config')
 
 const validateCookie = (req, res, next) => {
   return (req, res, next) => {
-    const token = req?.cookies?.token
-    const isValid = token
-      ? jwt.verify(token, secret)
-      : false
-    isValid ? next() : res.status(401).json({ isValid: false })
+    try {
+      const token = req?.cookies?.token
+      const isValid = token
+        ? jwt.verify(token, secret)
+        : false
+      isValid ? next() : res.status(401).json({ isValid: false })
+    } catch (e) {
+      console.log(e)
+      res.status(401).json({ isValid: false })
+    }
   }
 }
 
