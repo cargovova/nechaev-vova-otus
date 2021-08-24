@@ -1,10 +1,5 @@
-const User = require('./models/User')
 const Course = require('./models/Course')
 const Lesson = require('./models/Lesson')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const { validationResult } = require('express-validator')
-const { secret } = require('./config')
 
 class coursesController {
   async getAll(req, res) {
@@ -52,7 +47,7 @@ class coursesController {
 
   async getMyCourses(req, res) {
     try {
-      if(!req?.params?.user_id){
+      if (!req?.params?.user_id) {
         res.status(401).json({ isValid: false })
       }
       const allCourses = await Course.find({ owners: req?.params?.user_id })
@@ -105,8 +100,9 @@ class coursesController {
 
   async updateLesson(req, res) {
     try {
-      const { name, description, data } = req.body
-      await Lesson.updateOne({ _id: req.params.lesson_id }, { $set: { name, description, data: [data] } })
+      const { name, description } = req.body
+      const file = await req.file
+      await Lesson.updateOne({ _id: req.params.lesson_id }, { $set: { name: name, description: description, data: [file] } })
       return res.status(200).json({ message: 'update successfully' })
     } catch (e) {
       console.log(e)

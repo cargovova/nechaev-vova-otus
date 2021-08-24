@@ -3,6 +3,9 @@ const router = new Router()
 const coursesController = require('./coursesController')
 const jwt = require('jsonwebtoken')
 const { secret } = require('./config')
+const multer = require('multer')
+
+const upload = multer({ dest: 'uploads/' })
 
 const validateCookie = (req, res, next) => {
   return (req, res, next) => {
@@ -25,7 +28,7 @@ router.post('/', validateCookie(), coursesController.create)
 router.put('/:course_id', validateCookie(), coursesController.update)
 router.get('/lessons/:lesson_id', validateCookie(), coursesController.getLesson)
 router.put('/lessons/:lesson_id', validateCookie(), coursesController.newComment)
-router.put('/lessons/all_data/:lesson_id', validateCookie(), coursesController.updateLesson)
+router.put('/lessons/all_data/:lesson_id', validateCookie(), upload.single('image'), coursesController.updateLesson)
 
 /**
  * @swagger

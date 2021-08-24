@@ -58,7 +58,7 @@ export default {
       error: null,
       showModal: false,
       curentCourse: {},
-      lessonId: false,
+      lessonId: '',
       showEditLessonModal: false,
     }
   },
