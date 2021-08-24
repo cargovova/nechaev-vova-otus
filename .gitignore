@@ -1,0 +1,5 @@
+.vscode
+coverage
+nuxt/node_modules
+auth/node_modules
+nuxt/.eslintcache

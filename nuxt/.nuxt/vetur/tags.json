@@ -1,0 +1,14 @@
+{
+  "CommentLesson": {
+    "description": "Auto imported from components/CommentLesson.vue"
+  },
+  "CreateCourseModal": {
+    "description": "Auto imported from components/CreateCourseModal.vue"
+  },
+  "EditCourseModal": {
+    "description": "Auto imported from components/EditCourseModal.vue"
+  },
+  "EditLessonModal": {
+    "description": "Auto imported from components/EditLessonModal.vue"
+  }
+}
