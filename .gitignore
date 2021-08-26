@@ -1,0 +1,6 @@
+.vscode
+auth
+nuxt
+coverage
+client/node_modules
+server/node_modules
