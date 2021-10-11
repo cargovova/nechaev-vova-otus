@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InsertResult, Repository } from 'typeorm';
 import { User } from './user.entity';
@@ -23,13 +23,7 @@ export class UsersService {
       .where('user.name = :name', { name: user.name })
       .getOne();
     if (candidateByName) {
-      throw new HttpException(
-        {
-          status: HttpStatus.BAD_REQUEST,
-          message: 'Ошибка регистрации, попробуйте использовать другое имя.',
-        },
-        HttpStatus.BAD_REQUEST,
-      );
+      throw { message: 'Ошибка регистрации, попробуйте использовать другое имя.' };
     }
     const password_hash: string = await bcrypt.hash(user.password, 3);
     const insertedUser: InsertResult = await this.usersRepository
@@ -55,23 +49,11 @@ export class UsersService {
       .where('user.name = :name', { name: user.name })
       .getOne();
     if (!candidate) {
-      throw new HttpException(
-        {
-          status: HttpStatus.FORBIDDEN,
-          message: 'Некорректные учетные данные.',
-        },
-        HttpStatus.FORBIDDEN,
-      );
+      throw { message: 'Некорректные учетные данные' };
     }
     const isPassEquals = await bcrypt.compare(user.password, candidate.password_hash);
     if (!isPassEquals) {
-      throw new HttpException(
-        {
-          status: HttpStatus.FORBIDDEN,
-          message: 'Некорректные учетные данные.',
-        },
-        HttpStatus.FORBIDDEN,
-      );
+      throw { message: 'Некорректные учетные данные' };
     }
     const responseDto: ResponseRegUserDto = new ResponseRegUserDto(candidate);
     const access_token: string = this.jwtService.sign(
