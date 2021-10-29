@@ -16,6 +16,6 @@ import { ApiFilterFilter } from 'src/api-filter.filter';
   ],
   providers: [UsersService, { provide: APP_FILTER, useValue: new ApiFilterFilter<void>() }],
   controllers: [UsersController],
-  exports: [],
+  exports: [UsersService],
 })
 export class UsersModule {}

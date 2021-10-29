@@ -7,8 +7,8 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('node8 homework')
-    .setDescription('Documentation REST API')
-    .setVersion('1.0.0')
+    .setDescription('Documentation REST & GraphQL API')
+    .setVersion('2.0.0')
     .addTag('vova')
     .build();
   const document = SwaggerModule.createDocument(app, config);

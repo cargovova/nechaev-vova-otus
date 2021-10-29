@@ -1,0 +1,14 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "node9",
+      "database": "node8",
+      "username": "admin",
+      "password": "admin"
+    }
+  ]
+}
