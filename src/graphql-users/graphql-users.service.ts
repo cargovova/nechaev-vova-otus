@@ -25,7 +25,7 @@ export class UsersService {
     if (candidateByName) {
       throw new Error('Ошибка регистрации, попробуйте использовать другое имя.');
     }
-    const password_hash: string = await bcrypt.hash(user.password, 3);
+    const password_hash = await bcrypt.hash(user.password, 3);
     const insertedUser: InsertResult = await this.usersRepository
       .createQueryBuilder()
       .insert()
@@ -36,7 +36,7 @@ export class UsersService {
       })
       .returning('id, name')
       .execute();
-    const access_token: string = this.jwtService.sign(insertedUser.raw[0], {
+    const access_token = this.jwtService.sign(insertedUser.raw[0], {
       secret: this.configService.get('JWT_ACCESS_SECRET'),
       expiresIn: '30m',
     });
@@ -56,7 +56,7 @@ export class UsersService {
       throw new Error('Некорректные учетные данные');
     }
     const responseDto: ResponseRegUserDto = new ResponseRegUserDto(candidate);
-    const access_token: string = this.jwtService.sign(
+    const access_token = this.jwtService.sign(
       { ...responseDto },
       {
         secret: this.configService.get('JWT_ACCESS_SECRET'),

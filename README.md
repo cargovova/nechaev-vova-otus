@@ -1,3 +1,4 @@
 - `docker run -d -e POSTGRES_HOST=postgres -e POSTGRES_USER=admin -e POSTGRES_DB=node8 -e POSTGRES_PASSWORD=admin --name node8 -p 5432:5432 postgres`
 - `npm run start:dev` in root folder
 - `http://localhost:3000/api/docs` for documentation
+- `http://localhost:3000/graphql` for testing or import schema (src\graphql-users\schema.gql) to postman
