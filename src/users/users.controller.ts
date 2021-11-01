@@ -1,11 +1,14 @@
-import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, UseFilters, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { RequestRegUser } from './dto/requestRegUser.dto';
 import { ConfigService } from '@nestjs/config';
 import { ResponseRegUserDto } from './dto/responseReqUser.dto';
 import { JwtAutGuard } from './jwt-auth.guard';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiFilterFilter } from 'src/api-filter.filter';
 
+@ApiTags('REST API')
+@UseFilters(ApiFilterFilter)
 @Controller()
 export class UsersController {
   constructor(private usersService: UsersService, private readonly configService: ConfigService) {}

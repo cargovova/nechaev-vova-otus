@@ -1,5 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { UsersService } from 'src/users/users.service';
+import { ApiTags } from '@nestjs/swagger';
+import { UsersService } from './graphql-users.service';
 import { User } from './graphql-users.model';
 import { graphqlRequest } from './graphql-users.request';
 import { graphqlResponse } from './graphql-users.response';
