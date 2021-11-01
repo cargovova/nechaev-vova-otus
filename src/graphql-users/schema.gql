@@ -1,0 +1,28 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int!
+  name: String!
+}
+
+type graphqlResponse {
+  access_token: String!
+  id: Float!
+  name: String!
+}
+
+type Query {
+  users: [User!]!
+}
+
+type Mutation {
+  login(user: graphqlRequest!): graphqlResponse!
+  registration(user: graphqlRequest!): graphqlResponse!
+}
+
+input graphqlRequest {
+  name: String!
+  password: String!
+}
