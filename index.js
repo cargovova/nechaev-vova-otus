@@ -1,37 +1,11 @@
-const express = require('express'),
-  app = express(),
-  os = require('os'),
-  cluster = require('cluster');
+const express = require('express')
+const app = express()
+const port = 3000
 
-const host = '127.0.0.1';
-const port = 7000;
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
-app.use((req, res, next) => {
-  if (cluster.isWorker)
-    console.log(
-      `Worker ${cluster.worker.id} handle request`
-    );
-
-  next();
-});
-
-app.get('/', (req, res) => res.send('Cluster mode.'));
-
-if (cluster.isMaster) {
-  let cpus = os.cpus().length;
-
-  for (let i = 0; i < cpus; i++) cluster.fork();
-
-  cluster.on('exit', (worker, code) => {
-    console.log(
-      `Worker ${worker.id} finished. Exit code: ${code}`
-    );
-
-    app.listen(port, host, () =>
-      console.log(`Worker ${cluster.worker.id} launched`)
-    );
-  });
-} else
-  app.listen(port, host, () =>
-    console.log(`Worker ${cluster.worker.id} launched`)
-  );
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
